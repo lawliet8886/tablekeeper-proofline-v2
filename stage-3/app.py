@@ -590,7 +590,24 @@ def validate_import(document):
                 fail(422, "validation_failed")
             json.loads(receipt["body"])
         for sid, series in state["series"].items():
-            if sid != series["series_id"] or series["user_id"] not in state["users"] or not isinstance(series["references"], list) or any(ref not in state["reservations"] for ref in series["references"]):
+            references = series["references"]
+            exceptions = series["exceptions"]
+            if (sid != series["series_id"] or not opaque(sid)
+                    or series["user_id"] not in state["users"]
+                    or series["restaurant_id"] not in state["restaurants"]
+                    or type(series["revision"]) is not int or series["revision"] < 1
+                    or type(series["interval_weeks"]) is not int or not 1 <= series["interval_weeks"] <= 4
+                    or not isinstance(references, list) or not 2 <= len(references) <= 12
+                    or len(set(references)) != len(references)
+                    or not isinstance(exceptions, list) or len(exceptions) != len(references)
+                    or any(type(flag) is not bool for flag in exceptions)):
+                fail(422, "validation_failed")
+            for ref in references:
+                reservation = state["reservations"].get(ref)
+                if reservation is None or reservation["user_id"] != series["user_id"] or reservation["restaurant_id"] != series["restaurant_id"] or reservation.get("series_id") != sid:
+                    fail(422, "validation_failed")
+        for reservation in state["reservations"].values():
+            if reservation.get("series_id") and reservation["series_id"] not in state["series"]:
                 fail(422, "validation_failed")
     except (KeyError, TypeError, ValueError, ZoneInfoNotFoundError, Problem):
         fail(422, "validation_failed")
