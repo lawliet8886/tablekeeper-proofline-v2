@@ -147,9 +147,9 @@ def interval(reservation):
     return start, end
 
 
-def occupied(table_id, start, end, *, exclude=()):
+def occupied(restaurant_id, table_id, start, end, *, exclude=()):
     for reservation in STATE["reservations"].values():
-        if reservation["reference"] in exclude or reservation["status"] != "confirmed" or reservation["table_id"] != table_id:
+        if reservation["reference"] in exclude or reservation["status"] != "confirmed" or reservation["restaurant_id"] != restaurant_id or reservation["table_id"] != table_id:
             continue
         old_start, old_end = interval(reservation)
         if start < old_end and old_start < end:
@@ -271,7 +271,7 @@ def validate_fixture(fixture):
                 restaurant = restaurant_for(raw["restaurant_id"])
                 fields = validate_booking(restaurant, raw["table_id"], raw["starts_at_local"], raw["party_size"])
                 start, end = datetime.fromisoformat(fields["starts_at"]).astimezone(timezone.utc), datetime.fromisoformat(fields["ends_at"]).astimezone(timezone.utc)
-                if occupied(fields["table_id"], start, end):
+                if occupied(raw["restaurant_id"], fields["table_id"], start, end):
                     fail(422, "validation_failed")
                 result["reservations"][ref] = {"reservation_id": rid, "reference": ref, "restaurant_id": raw["restaurant_id"], "user_id": uid, "status": "confirmed", "created_at": datetime.now(timezone.utc).isoformat(timespec="seconds"), **fields}
         finally:
@@ -432,7 +432,7 @@ class Handler(BaseHTTPRequestHandler):
                             raise
                         end = aware.astimezone(timezone.utc) + timedelta(minutes=restaurant["reservation_duration_minutes"])
                         start = aware.astimezone(timezone.utc)
-                        available = [table["id"] for table in restaurant["tables"] if table["capacity"] >= party and not occupied(table["id"], start, end)]
+                        available = [table["id"] for table in restaurant["tables"] if table["capacity"] >= party and not occupied(rid, table["id"], start, end)]
                         slots.append({"starts_at_local": local.strftime("%Y-%m-%dT%H:%M"), "starts_at": aware.isoformat(timespec="seconds"), "available_table_ids": available})
                 return 200, {"restaurant_id": rid, "date": day_text, "timezone": restaurant["timezone"], "slots": slots}
             user_id = self.user()
@@ -455,7 +455,7 @@ class Handler(BaseHTTPRequestHandler):
                     fields = validate_booking(restaurant, table_id, local, party)
                     start = datetime.fromisoformat(fields["starts_at"]).astimezone(timezone.utc)
                     end = datetime.fromisoformat(fields["ends_at"]).astimezone(timezone.utc)
-                    if occupied(table_id, start, end):
+                    if occupied(rid, table_id, start, end):
                         fail(409, "table_unavailable")
                     reference = secrets.token_hex(5).upper()
                     while reference in STATE["reservations"]:
@@ -488,7 +488,7 @@ class Handler(BaseHTTPRequestHandler):
                     proposed.append({**current, **fields})
                 for candidate in proposed:
                     start, end = interval(candidate)
-                    if occupied(candidate["table_id"], start, end, exclude=refs):
+                    if occupied(candidate["restaurant_id"], candidate["table_id"], start, end, exclude=refs):
                         fail(409, "table_unavailable")
                 for i, candidate in enumerate(proposed):
                     a, b = interval(candidate)
@@ -520,7 +520,7 @@ class Handler(BaseHTTPRequestHandler):
                     fields = changes(reservation, body)
                     candidate = {**reservation, **fields}
                     start, end = interval(candidate)
-                    if occupied(candidate["table_id"], start, end, exclude=(reservation["reference"],)):
+                    if occupied(candidate["restaurant_id"], candidate["table_id"], start, end, exclude=(reservation["reference"],)):
                         fail(409, "table_unavailable")
                     STATE["reservations"][reservation["reference"]] = candidate
                     return 200, public_reservation(candidate)
