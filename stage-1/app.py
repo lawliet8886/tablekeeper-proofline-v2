@@ -288,33 +288,60 @@ def validate_import(document):
     if not isinstance(state, dict) or set(state) != set(blank_state()) or any(not isinstance(value, dict) for value in state.values()):
         fail(422, "validation_failed")
     try:
+        emails = set()
         for uid, user in state["users"].items():
-            if uid != user["id"] or not opaque(uid) or not EMAIL.fullmatch(user["email"]) or not isinstance(user["display_name"], str):
+            if uid != user["id"] or not opaque(uid) or not EMAIL.fullmatch(user["email"]) or not isinstance(user["display_name"], str) or user["email"] in emails:
                 fail(422, "validation_failed")
-            bytes.fromhex(user["salt"])
-            bytes.fromhex(user["hash"])
+            emails.add(user["email"])
+            if len(bytes.fromhex(user["salt"])) != 16 or len(bytes.fromhex(user["hash"])) != 32:
+                fail(422, "validation_failed")
         for rid, rest in state["restaurants"].items():
-            if rid != rest["id"] or not opaque(rid):
+            if rid != rest["id"] or not opaque(rid) or not isinstance(rest["name"], str):
                 fail(422, "validation_failed")
             ZoneInfo(rest["timezone"])
             integer(rest["slot_minutes"])
             integer(rest["reservation_duration_minutes"])
             if type(rest["cancellation_cutoff_minutes"]) is not int or rest["cancellation_cutoff_minutes"] < 0:
                 fail(422, "validation_failed")
+            if not isinstance(rest["opening_hours"], list) or not isinstance(rest["tables"], list):
+                fail(422, "validation_failed")
+            days = set()
             for h in rest["opening_hours"]:
-                if h["weekday"] not in WEEKDAYS or min_of_clock(h["opens"]) >= min_of_clock(h["closes"]):
+                if h["weekday"] not in WEEKDAYS or h["weekday"] in days or min_of_clock(h["opens"]) >= min_of_clock(h["closes"]):
                     fail(422, "validation_failed")
+                days.add(h["weekday"])
+            tables = set()
             for table in rest["tables"]:
                 opaque(table["id"])
+                if table["id"] in tables or not isinstance(table["label"], str):
+                    fail(422, "validation_failed")
                 integer(table["capacity"])
+                tables.add(table["id"])
+        reservation_ids = set()
+        confirmed = []
         for ref, res in state["reservations"].items():
-            if ref != res["reference"] or res["user_id"] not in state["users"] or res["restaurant_id"] not in state["restaurants"] or res["status"] not in ("confirmed", "cancelled"):
+            if ref != res["reference"] or not 6 <= len(ref) <= 12 or not re.fullmatch(r"[A-Z0-9]+", ref) or res["user_id"] not in state["users"] or res["restaurant_id"] not in state["restaurants"] or res["status"] not in ("confirmed", "cancelled"):
                 fail(422, "validation_failed")
+            opaque(res["reservation_id"])
+            if res["reservation_id"] in reservation_ids:
+                fail(422, "validation_failed")
+            reservation_ids.add(res["reservation_id"])
             for key in ("starts_at", "ends_at", "created_at"):
                 if datetime.fromisoformat(res[key]).tzinfo is None:
                     fail(422, "validation_failed")
-            if type(res["party_size"]) is not int or res["party_size"] < 1:
+            restaurant = state["restaurants"][res["restaurant_id"]]
+            fields = validate_booking(restaurant, res["table_id"], res["starts_at_local"], res["party_size"])
+            if any(res.get(key) != value for key, value in fields.items()):
                 fail(422, "validation_failed")
+            if res["status"] == "confirmed":
+                confirmed.append(res)
+        for index, reservation in enumerate(confirmed):
+            start, end = interval(reservation)
+            for other in confirmed[:index]:
+                if reservation["restaurant_id"] == other["restaurant_id"] and reservation["table_id"] == other["table_id"]:
+                    old_start, old_end = interval(other)
+                    if start < old_end and old_start < end:
+                        fail(422, "validation_failed")
         for token, uid in state["tokens"].items():
             if not isinstance(token, str) or uid not in state["users"]:
                 fail(422, "validation_failed")
