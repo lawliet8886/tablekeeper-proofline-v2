@@ -113,7 +113,7 @@ async function renderReservation(reservation) {
   const detail = document.querySelector('#lookup-detail');
   detail.innerHTML = `<section class="panel" data-testid="reservation-detail"><div class="eyebrow">${esc(restaurant.name)}</div><h2>Reserva ${esc(reservation.reference)}</h2><p data-testid="reservation-tables">${esc(tableNames)}</p><p>${esc(reservation.starts_at_local)}</p><p>Status: <strong data-testid="reservation-status">${esc(reservation.status)}</strong></p>${reservation.status === 'confirmed' ? '<button class="secondary" data-testid="reservation-cancel-button">Cancelar reserva</button>' : ''}</section>`;
   detail.querySelector('[data-testid="reservation-cancel-button"]')?.addEventListener('click', async () => {
-    try { const changed = await api(`/reservations/${encodeURIComponent(reservation.reference)}/cancel`, { method:'POST', body:'{}' }); document.querySelector('#lookup-feedback').innerHTML = ''; renderReservation(changed); }
+    try { const changed = await api(`/reservations/${encodeURIComponent(reservation.reference)}/cancel`, { method:'POST' }); document.querySelector('#lookup-feedback').innerHTML = ''; renderReservation(changed); }
     catch (error) { document.querySelector('#lookup-feedback').innerHTML = notice('reservation-error', error.message); }
   });
 }
