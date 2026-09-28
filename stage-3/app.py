@@ -606,9 +606,11 @@ def validate_import(document):
                 reservation = state["reservations"].get(ref)
                 if reservation is None or reservation["user_id"] != series["user_id"] or reservation["restaurant_id"] != series["restaurant_id"] or reservation.get("series_id") != sid:
                     fail(422, "validation_failed")
-        for reservation in state["reservations"].values():
-            if reservation.get("series_id") and reservation["series_id"] not in state["series"]:
-                fail(422, "validation_failed")
+        for ref, reservation in state["reservations"].items():
+            if "series_id" in reservation:
+                sid = reservation["series_id"]
+                if not isinstance(sid, str) or sid not in state["series"] or ref not in state["series"][sid]["references"]:
+                    fail(422, "validation_failed")
     except (KeyError, TypeError, ValueError, ZoneInfoNotFoundError, Problem):
         fail(422, "validation_failed")
     return copy.deepcopy(state)
