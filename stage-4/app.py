@@ -560,6 +560,7 @@ def validate_import(document):
     old_keys = {"users", "restaurants", "reservations", "tokens", "receipts"}
     if not isinstance(state, dict) or not old_keys <= set(state) or not set(state) <= set(blank_state()) or any(not isinstance(value, dict) for value in state.values()):
         fail(422, "validation_failed")
+    legacy_revisions = "closures" not in state and "plans" not in state
     for key in set(blank_state()) - set(state):
         state[key] = {}
     try:
@@ -606,6 +607,8 @@ def validate_import(document):
             state["restaurant_revisions"].setdefault(rid, 0)
             if type(state["restaurant_revisions"][rid]) is not int or state["restaurant_revisions"][rid] < 0:
                 fail(422, "validation_failed")
+            if legacy_revisions:
+                state["restaurant_revisions"][rid] += len(policies)
             state["closures"].setdefault(rid, [])
             if not isinstance(state["closures"][rid], list):
                 fail(422, "validation_failed")
