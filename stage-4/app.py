@@ -461,6 +461,11 @@ def canonical(body):
     return json.dumps(body, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
 
 
+def plan_digest(plan):
+    keys = ("plan_id", "restaurant_id", "restaurant_revision", "closure", "assignments", "moved_count", "unused_seats")
+    return hashlib.sha256(canonical({key: plan[key] for key in keys}).encode("utf-8")).hexdigest()
+
+
 def receipt_key(user_id, path, key):
     return json.dumps([user_id, path, key], separators=(",", ":"))
 
@@ -696,17 +701,40 @@ def validate_import(document):
                 if not isinstance(sid, str) or sid not in state["series"] or ref not in state["series"][sid]["references"]:
                     fail(422, "validation_failed")
         for plan_id, plan in state["plans"].items():
-            if (plan_id != plan["plan_id"] or not opaque(plan_id) or plan["restaurant_id"] not in state["restaurants"]
+            if (not isinstance(plan, dict) or plan_id != plan["plan_id"] or not opaque(plan_id) or plan["restaurant_id"] not in state["restaurants"]
                     or type(plan["restaurant_revision"]) is not int or plan["restaurant_revision"] < 0
-                    or type(plan["applied"]) is not bool or not isinstance(plan["assignments"], list)):
+                    or type(plan["applied"]) is not bool or not isinstance(plan["assignments"], list)
+                    or type(plan["moved_count"]) is not int or plan["moved_count"] < 0
+                    or type(plan["unused_seats"]) is not int or plan["unused_seats"] < 0
+                    or plan.get("integrity") != plan_digest(plan)):
                 fail(422, "validation_failed")
             closure = plan["closure"]
             if closure["table_id"] not in {t["id"] for t in state["restaurants"][plan["restaurant_id"]]["tables"]} or explicit_instant(closure["from"]) >= explicit_instant(closure["to"]):
                 fail(422, "validation_failed")
+            refs = []
             for assignment in plan["assignments"]:
                 if assignment["reference"] not in state["reservations"] or type(assignment["changed"]) is not bool:
                     fail(422, "validation_failed")
-                select_tables(state["restaurants"][plan["restaurant_id"]], {"table_ids": assignment["table_ids"]})
+                reservation = state["reservations"][assignment["reference"]]
+                if reservation["restaurant_id"] != plan["restaurant_id"]:
+                    fail(422, "validation_failed")
+                ids, _ = select_tables(state["restaurants"][plan["restaurant_id"]], {"table_ids": assignment["table_ids"]})
+                if (closure["table_id"] in ids
+                        or normalized_ids(state["restaurants"][plan["restaurant_id"]], ids) != ids
+                        or sum(reservation["accepted_terms"]["capacities"][item] for item in ids) < reservation["party_size"]):
+                    fail(422, "validation_failed")
+                refs.append(assignment["reference"])
+            if refs != sorted(set(refs)):
+                fail(422, "validation_failed")
+            if not plan["applied"] and plan["restaurant_revision"] == state["restaurant_revisions"][plan["restaurant_id"]]:
+                old = globals()["STATE"]
+                globals()["STATE"] = state
+                try:
+                    expected, moved, unused = plan_seating(state["restaurants"][plan["restaurant_id"]], closure)
+                finally:
+                    globals()["STATE"] = old
+                if (plan["assignments"], plan["moved_count"], plan["unused_seats"]) != (expected, moved, unused):
+                    fail(422, "validation_failed")
     except (KeyError, TypeError, ValueError, ZoneInfoNotFoundError, Problem):
         fail(422, "validation_failed")
     return copy.deepcopy(state)
@@ -844,6 +872,7 @@ class Handler(BaseHTTPRequestHandler):
                             "restaurant_revision": STATE["restaurant_revisions"][rid],
                             "closure": closure, "assignments": assignments, "moved_count": moved,
                             "unused_seats": unused, "applied": False}
+                    plan["integrity"] = plan_digest(plan)
                     STATE["plans"][plan_id] = plan
                     result = {k: copy.deepcopy(plan[k]) for k in ("plan_id", "restaurant_revision", "closure", "assignments", "moved_count", "unused_seats")}
                     record(user_id, path, key, body, result)
