@@ -1,0 +1,56 @@
+{
+  "at_utc": "2026-09-30T12:07:50.146073+00:00",
+  "outcome": "TERMINAL_ACCEPT_WITH_DISCLOSED_INTERVENTION",
+  "room": "feef446d-fba0-4580-b576-4cf1d4a2324c",
+  "coordinator_terminal_message": "be43118f-7703-4fd5-9b95-abb45f66af1e",
+  "revision": "96ab4b80f21c3ff7744f56c029ed3f9b3fea26ac",
+  "all_public_claims": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "verified_files": [
+    {
+      "path": "scratch\\tablekeeper-final-v2-20260928\\checks\\verifier-review-stage4-96ab4b8.json",
+      "sha256": "ba2937ac7aabf873bf30932633010b4d5e363e246168bfd863ce90d07b5844fe",
+      "match": true
+    },
+    {
+      "path": "scratch\\tablekeeper-final-v2-20260928\\checks\\official-all-clean-96ab4b8\\summary.json",
+      "sha256": "c673c14171e6ef10c43790469ac1cc7d5fd004b549f1819deee42607896e547f",
+      "match": true
+    },
+    {
+      "path": "scratch\\tablekeeper-final-v2-20260928\\checks\\official-all-clean-96ab4b8\\stage-1\\report.json",
+      "sha256": "75ccc9881168aa00356e4b5105dc8b4e4035a3e1d48feacb7fe88ba23856fac6",
+      "match": true
+    },
+    {
+      "path": "scratch\\tablekeeper-final-v2-20260928\\checks\\official-all-clean-96ab4b8\\stage-2\\report.json",
+      "sha256": "b69f3aedc820b6fc20d41b80a740615822a730821b76e97628fba81ec128255c",
+      "match": true
+    },
+    {
+      "path": "scratch\\tablekeeper-final-v2-20260928\\checks\\official-all-clean-96ab4b8\\stage-3\\report.json",
+      "sha256": "e8badfdc41133ddb805eb91cd983a82d2f731f478f0824d776bd9e8195e98633",
+      "match": true
+    },
+    {
+      "path": "scratch\\tablekeeper-final-v2-20260928\\checks\\official-all-clean-96ab4b8\\stage-4\\report.json",
+      "sha256": "8f4be8be1b41fa14515d95e20aac10195eb9120e5f23d0562de44dbea0f35c11",
+      "match": true
+    }
+  ],
+  "checks_reused": "Immutable independent exact-revision clean-clone reports; not rerun",
+  "source_zip_sha256": "cca8fa73bf627e8e53057e19816f40c189efb5ae58ca1b6b205eef12e21c2993",
+  "pending": [
+    "Original full UI room.json",
+    "Offline harness check",
+    "Cost/time consolidation",
+    "Presentation and actual factory video",
+    "Privacy review",
+    "Publication/submission not authorized"
+  ],
+  "autonomy": "Administrative recovery and one human recovery notice during stage4 disclosed; jury outcome unknown"
+}

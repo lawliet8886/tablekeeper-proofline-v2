@@ -1,0 +1,38 @@
+{
+  "observed_at_utc": "2026-09-30T14:51:04.836736+00:00",
+  "source": "BAND UI Copy full session activated through focused keyboard; browser clipboard read; UTF-8 bytes unchanged",
+  "room_id": "feef446d-fba0-4580-b576-4cf1d4a2324c",
+  "scope": "full",
+  "bytes": 7101812,
+  "sha256": "58afadf25b648df0692ecff73a226444af33ecc3611b064ac2c317760c7c5160",
+  "event_count": 4871,
+  "independent_cli_metadata": {
+    "total_pages": 49,
+    "limit": 100,
+    "last_page_server_events": 71,
+    "derived_server_event_count": 4871,
+    "excluded_local_system_ids": [
+      "local-sys-0fe43cdb-1d8e-4ba1-94db-15e2d4c88a36",
+      "local-sys-30958ac3-36ac-4895-8d02-1369fa22b711",
+      "local-sys-3b1a66c3-5152-4024-ad9c-8f3b53fec378",
+      "local-sys-42c21fbd-91dc-4e4a-ab53-c748d935fdf7",
+      "local-sys-5b13f474-84e3-4c00-bc39-c52101b4db6c",
+      "local-sys-d7efd380-8311-4400-bb36-b71896c84eba",
+      "local-sys-f131dcbd-86f4-42c1-b0b6-c1741ad593bd",
+      "local-sys-f6891519-298f-429c-9041-4ec0c17bb141",
+      "local-sys-ff745de5-7b9e-41d0-9a5e-d5b339ce329b"
+    ],
+    "boundary_server_ids_all_present": true,
+    "note": "CLI merges local-only system events into every page; these are not original cloud room events. Do not inject them into UI export."
+  },
+  "integrity_pass": true,
+  "privacy_pattern_counts": {
+    "private_key": 0,
+    "provider_key": 0,
+    "bearer_literal": 0,
+    "secret_assignment": 0
+  },
+  "privacy_limits": "Pattern review does not cover all personal data. Original room includes user name/email, local paths, messages and tool events; private local evidence only, not authorized for publication.",
+  "download_transport_failed": true,
+  "copy_transport_disclosed": true
+}

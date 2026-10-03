@@ -1,0 +1,14 @@
+{
+  "observed_at_utc": "2026-09-30T14:56:27.589609+00:00",
+  "command": "wsl.exe -d Ubuntu-24.04 --exec bash /mnt/c/Users/biel_/Documents/ChatGPT/Concurso/DarkFactory2026/scripts/run_official_harness.sh check /mnt/c/Users/biel_/Documents/ChatGPT/Concurso/DarkFactory2026/scratch/tablekeeper-v2-local-package-20260930/repository --track tablekeeper",
+  "exit_code": 0,
+  "output": "ok — gates 1, 2 and the mandate part of gate 4 pass. Not checked here: gate 3 (stage-1/ builds and serves /health).",
+  "gate3_evidence_reused": "evidence/candidate_v2_terminal_audit_20260930.json: exact-SHA independent clean-clone official isolated reports; not rerun",
+  "room_export_receipt": "evidence/v2_original_room_export_verified_20260930.json",
+  "limitations": [
+    "No hidden-judge proof",
+    "Disclosed intervention during stage4",
+    "Original export via UI Copy full session, not Download (no file generated)",
+    "Private local package, not published/submitted"
+  ]
+}

@@ -1,0 +1,278 @@
+1
+00:00:00,000 --> 00:00:03,200
+A reservation system has to keep
+its promises,
+
+2
+00:00:03,600 --> 00:00:05,380
+even when requests are repeated,
+
+3
+00:00:05,400 --> 00:00:07,940
+or a restaurant changes its plans.
+
+4
+00:00:08,500 --> 00:00:12,180
+This is Tablekeeper, built by three agents
+in BAND.
+
+5
+00:00:12,760 --> 00:00:16,720
+Here is the accepted application with
+fictitious demonstration data.
+
+6
+00:00:17,280 --> 00:00:19,900
+We search for a table, select a time,
+
+7
+00:00:20,220 --> 00:00:23,140
+confirm a reservation and retrieve
+its reference.
+
+8
+00:00:23,720 --> 00:00:26,300
+An unknown reference produces a
+clear error.
+
+9
+00:00:26,320 --> 00:00:29,840
+Behind this workflow are four
+complete stages
+
+10
+00:00:29,860 --> 00:00:32,180
+and an independently reviewed result.
+
+11
+00:00:35,000 --> 00:00:39,620
+The Coordinator carries the full
+assignment and its acceptance criteria.
+
+12
+00:00:40,220 --> 00:00:42,280
+The Builder owns the implementation.
+
+13
+00:00:42,920 --> 00:00:47,660
+The Verifier checks the exact revision
+independently and can reject it.
+
+14
+00:00:48,040 --> 00:00:50,800
+Their standing mandates describe
+these responsibilities
+
+15
+00:00:50,820 --> 00:00:53,440
+without encoding the reservation contract.
+
+16
+00:00:53,940 --> 00:00:55,980
+This is the original BAND room.
+
+17
+00:00:56,320 --> 00:00:59,920
+A numbered hand-off carries the cumulative
+task with hashes
+
+18
+00:00:59,940 --> 00:01:01,060
+to check completeness.
+
+19
+00:01:01,080 --> 00:01:04,980
+These are real messages and results from
+the selected run,
+
+20
+00:01:05,240 --> 00:01:06,580
+inspected after completion.
+
+21
+00:01:10,000 --> 00:01:12,520
+The most useful review was a rejection.
+
+22
+00:01:13,200 --> 00:01:15,980
+Public checks had passed, but the
+Verifier found
+
+23
+00:01:16,000 --> 00:01:19,360
+that an imported, tampered closure plan
+could later confirm
+
+24
+00:01:19,380 --> 00:01:21,380
+a reservation on a closing table.
+
+25
+00:01:21,860 --> 00:01:23,520
+The Builder repaired validation.
+
+26
+00:01:24,080 --> 00:01:26,820
+The independent re-check required the
+invalid import
+
+27
+00:01:26,840 --> 00:01:29,860
+to return an error and leave the
+destination unchanged.
+
+28
+00:01:30,420 --> 00:01:32,240
+It then approved the repaired commit.
+
+29
+00:01:32,640 --> 00:01:35,440
+The original record preserves the defect,
+the correction,
+
+30
+00:01:35,680 --> 00:01:38,840
+and acceptance of revision 96AB4B8.
+
+31
+00:01:45,110 --> 00:01:48,230
+Stage 1 establishes atomic operations,
+
+32
+00:01:48,630 --> 00:01:51,530
+idempotent writes, and state export
+and import.
+
+33
+00:01:52,310 --> 00:01:55,990
+Stage 2 adds the browser workflow and
+recovery from stale state
+
+34
+00:01:56,010 --> 00:01:57,230
+and lost responses.
+
+35
+00:01:58,150 --> 00:01:59,710
+Stage 3 introduces policies
+
+36
+00:01:59,730 --> 00:02:04,170
+that take effect over time while keeping
+accepted booking terms truthful.
+
+37
+00:02:05,070 --> 00:02:08,090
+Stage 4 adds series changes and
+closure replanning
+
+38
+00:02:08,110 --> 00:02:10,250
+with preview and atomic application.
+
+39
+00:02:10,270 --> 00:02:14,510
+Each stage remains a complete service with
+its own Dockerfile
+
+40
+00:02:14,530 --> 00:02:15,630
+and run instructions.
+
+41
+00:02:16,410 --> 00:02:18,870
+The application itself needs no
+model call.
+
+42
+00:02:20,000 --> 00:02:23,480
+The independent clean clone passed the
+public checks
+
+43
+00:02:23,500 --> 00:02:26,280
+for all four stages in isolated mode.
+
+44
+00:02:26,740 --> 00:02:29,880
+The delivery ties these reports to the
+accepted source,
+
+45
+00:02:30,340 --> 00:02:34,180
+three generic mandates, and the original
+full BAND export.
+
+46
+00:02:34,800 --> 00:02:38,520
+The documentation records design choices,
+elapsed time,
+
+47
+00:02:38,920 --> 00:02:42,080
+measured partial model usage, and
+recovery history.
+
+48
+00:02:42,580 --> 00:02:46,080
+It distinguishes subscription usage from a
+billed project cost.
+
+49
+00:02:46,100 --> 00:02:48,380
+Public checks support the result.
+
+50
+00:02:48,880 --> 00:02:51,380
+Private evaluation remains the
+organizers' decision.
+
+51
+00:02:51,980 --> 00:02:53,932
+The evidence is available for inspection.
+
+52
+00:02:55,020 --> 00:02:59,020
+Recovery was needed between stages and
+during Stage 4.
+
+53
+00:02:59,460 --> 00:03:02,780
+The operator restored runtime
+files, infrastructure,
+
+54
+00:03:03,260 --> 00:03:05,040
+and the same agents and threads,
+
+55
+00:03:05,260 --> 00:03:07,440
+then sent one administrative notice.
+
+56
+00:03:08,000 --> 00:03:11,780
+There were no operator production edits or
+repeated stage tasks.
+
+57
+00:03:12,039 --> 00:03:13,420
+We disclose this intervention
+
+58
+00:03:13,440 --> 00:03:16,000
+and do not claim uninterrupted autonomy.
+
+59
+00:03:16,940 --> 00:03:19,160
+Tablekeeper brings together a
+working service,
+
+60
+00:03:19,560 --> 00:03:22,040
+reproducible stages, and the
+original record
+
+61
+00:03:22,060 --> 00:03:24,200
+of how the team built and checked it.
+

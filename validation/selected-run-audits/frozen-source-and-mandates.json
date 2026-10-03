@@ -1,0 +1,51 @@
+{
+  "stage-1": {
+    "files": 3,
+    "sha256_by_path": {
+      "app.py": "3b876ce967a943691e671d7cc3c02d8ab6d1cfe8e7a12d5c16ea0ac767898a70",
+      "Dockerfile": "bba918251809cf1a8c7ca53d991a0d9bfdf1c473d58dc7f720ebf16a470665dd",
+      "RUN.md": "e886f63e077b004bc39dc8c1a6a1e12af5a3b8ed397f4e4f79ed892f8a923332"
+    }
+  },
+  "stage-2": {
+    "files": 6,
+    "sha256_by_path": {
+      "app.js": "1cdc925fc511e828b2b4092e208dda4067621e73059f7c13f13b45044c3f9cee",
+      "app.py": "0c21ec9b975c5ce667b3742e39a4387426c44b1c3dd872ca0137f17428464de3",
+      "Dockerfile": "91f279efd7a3b5dd9da4d632ef48a0895a3ad0fb2114e2492bd5045357d52ff4",
+      "index.html": "4d98fbeb293318f7f87c7945288b708f7c3be712748209ed1d5c470553b1eec4",
+      "RUN.md": "4cc1a92780ba144855299ca5d8366a894cd6460894fc32829299114ee1cb1de1",
+      "style.css": "b7658e6b940c3229c3f5d42cf8b795d48875e9de0f3befe2be8c89bc0ba66013"
+    }
+  },
+  "stage-3": {
+    "files": 6,
+    "sha256_by_path": {
+      "app.js": "1cdc925fc511e828b2b4092e208dda4067621e73059f7c13f13b45044c3f9cee",
+      "app.py": "d4554ab8f4ef994406002812c0f7e25e26387b353cc4c3f8e110fde84258ac27",
+      "Dockerfile": "91f279efd7a3b5dd9da4d632ef48a0895a3ad0fb2114e2492bd5045357d52ff4",
+      "index.html": "4d98fbeb293318f7f87c7945288b708f7c3be712748209ed1d5c470553b1eec4",
+      "RUN.md": "30a5675e5a990e54bf2557225294e0879410646367f81be2a6edf893bdc072ab",
+      "style.css": "b7658e6b940c3229c3f5d42cf8b795d48875e9de0f3befe2be8c89bc0ba66013"
+    }
+  },
+  "stage-4": {
+    "files": 6,
+    "sha256_by_path": {
+      "app.js": "1cdc925fc511e828b2b4092e208dda4067621e73059f7c13f13b45044c3f9cee",
+      "app.py": "b850c699253a348d128760d8182fa303b61023b28397ea423ae59c2f35860d89",
+      "Dockerfile": "91f279efd7a3b5dd9da4d632ef48a0895a3ad0fb2114e2492bd5045357d52ff4",
+      "index.html": "4d98fbeb293318f7f87c7945288b708f7c3be712748209ed1d5c470553b1eec4",
+      "RUN.md": "0c52096e7adde0919856839cb11097ed893ba0665e8c6424cc84b1f39d2b31e7",
+      "style.css": "b7658e6b940c3229c3f5d42cf8b795d48875e9de0f3befe2be8c89bc0ba66013"
+    }
+  },
+  "mandates": {
+    "files": 3,
+    "sha256_by_path": {
+      "proofline-builder.md": "cfae68edf0772ad318a5a66a1fd782f49015a4a1c1601621d882ae3b785046d4",
+      "proofline-coordinator.md": "fc41aa9b28635e8065fb1957169f159eeea1e27f04b38b8e3733cbee75d61202",
+      "proofline-verifier.md": "24eab3de7972a437a40e9fc0714d35a36c95fef368ad5c4e875154b8bde1b96f"
+    }
+  }
+}

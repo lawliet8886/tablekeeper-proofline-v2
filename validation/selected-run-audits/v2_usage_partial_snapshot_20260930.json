@@ -1,0 +1,165 @@
+{
+  "captured_at_utc": "2026-09-30T14:06:28.515279+00:00",
+  "scope": "Three stage4 provider sessions only; stages1-3 and supervisor not included",
+  "source": "BAND usage session archived catalog-equivalent snapshot",
+  "rows": [
+    {
+      "seat": "coordinator",
+      "thread": "01a0f005-b333-7fe2-aa53-c2402d485129",
+      "sessions": [
+        {
+          "provider": "codex",
+          "sessionId": "2026/09/29/rollout-2026-09-29T22-55-02-01a0f005-b333-7fe2-aa53-c2402d485129",
+          "projectPath": "",
+          "inputTokens": 277289,
+          "outputTokens": 59159,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 29595904,
+          "reasoningTokens": 23684,
+          "totalCost": 7.065348800000001,
+          "models": [
+            {
+              "provider": "codex",
+              "model": "gpt-6-sol",
+              "inputTokens": 277289,
+              "outputTokens": 59159,
+              "cacheCreationTokens": 0,
+              "cacheReadTokens": 29595904,
+              "reasoningTokens": 0,
+              "cost": 7.065348800000001,
+              "missingPricing": false,
+              "pricing": [
+                {
+                  "costKind": "estimated_equivalent",
+                  "currency": "USD",
+                  "source": "usage_import",
+                  "amountUsd": 7.065348800000001,
+                  "missingPricing": false
+                }
+              ]
+            }
+          ],
+          "lastActivity": "2026-09-30T03:45:14.013Z",
+          "attribution": {
+            "agentId": "0cbf0d8b-7121-4743-9e5f-37e2a94482a6",
+            "peerId": "default/proofline-coordinator",
+            "peerName": "gabrielfernandezetica/proofline-coordinator",
+            "chatId": "feef446d-fba0-4580-b576-4cf1d4a2324c",
+            "chatIds": [
+              "feef446d-fba0-4580-b576-4cf1d4a2324c"
+            ],
+            "live": true
+          },
+          "archived": true
+        }
+      ],
+      "capture_success": true
+    },
+    {
+      "seat": "builder",
+      "thread": "01a0f009-4419-73c2-aa65-59eaafaa564b",
+      "sessions": [
+        {
+          "provider": "codex",
+          "sessionId": "2026/09/29/rollout-2026-09-29T22-58-57-01a0f009-4419-73c2-aa65-59eaafaa564b",
+          "projectPath": "",
+          "inputTokens": 355332,
+          "outputTokens": 50918,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 34501632,
+          "reasoningTokens": 18280,
+          "totalCost": 8.120170400000001,
+          "models": [
+            {
+              "provider": "codex",
+              "model": "gpt-6-sol",
+              "inputTokens": 355332,
+              "outputTokens": 50918,
+              "cacheCreationTokens": 0,
+              "cacheReadTokens": 34501632,
+              "reasoningTokens": 0,
+              "cost": 8.120170400000001,
+              "missingPricing": false,
+              "pricing": [
+                {
+                  "costKind": "estimated_equivalent",
+                  "currency": "USD",
+                  "source": "usage_import",
+                  "amountUsd": 8.120170400000001,
+                  "missingPricing": false
+                }
+              ]
+            }
+          ],
+          "lastActivity": "2026-09-30T03:43:27.262Z",
+          "attribution": {
+            "agentId": "7bd9ac47-bffa-463f-abc6-b37250b935cb",
+            "peerId": "default/proofline-builder",
+            "peerName": "gabrielfernandezetica/proofline-builder",
+            "chatId": "feef446d-fba0-4580-b576-4cf1d4a2324c",
+            "chatIds": [
+              "feef446d-fba0-4580-b576-4cf1d4a2324c"
+            ],
+            "live": true
+          },
+          "archived": true
+        }
+      ],
+      "capture_success": true
+    },
+    {
+      "seat": "verifier",
+      "thread": "01a0f032-98de-7301-810a-b278c7d2090c",
+      "sessions": [
+        {
+          "provider": "codex",
+          "sessionId": "2026/09/29/rollout-2026-09-29T23-44-04-01a0f032-98de-7301-810a-b278c7d2090c",
+          "projectPath": "",
+          "inputTokens": 270105,
+          "outputTokens": 33915,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 20320768,
+          "reasoningTokens": 10096,
+          "totalCost": 4.9435136,
+          "models": [
+            {
+              "provider": "codex",
+              "model": "gpt-6-sol",
+              "inputTokens": 270105,
+              "outputTokens": 33915,
+              "cacheCreationTokens": 0,
+              "cacheReadTokens": 20320768,
+              "reasoningTokens": 0,
+              "cost": 4.9435136,
+              "missingPricing": false,
+              "pricing": [
+                {
+                  "costKind": "estimated_equivalent",
+                  "currency": "USD",
+                  "source": "usage_import",
+                  "amountUsd": 4.9435136,
+                  "missingPricing": false
+                }
+              ]
+            }
+          ],
+          "lastActivity": "2026-09-30T04:14:33.457Z",
+          "attribution": {
+            "agentId": "79cda587-7bba-4cf0-8622-9a00b4ff0fa6",
+            "peerId": "default/proofline-verifier",
+            "peerName": "gabrielfernandezetica/proofline-verifier",
+            "chatId": "feef446d-fba0-4580-b576-4cf1d4a2324c",
+            "chatIds": [
+              "feef446d-fba0-4580-b576-4cf1d4a2324c"
+            ],
+            "live": true
+          },
+          "archived": true
+        }
+      ],
+      "capture_success": true
+    }
+  ],
+  "total_estimated_usd": 20.1290328,
+  "warning": "Not actual spend; archived lastActivity may predate recovery/closeout. Not a complete room cost ledger."
+}
