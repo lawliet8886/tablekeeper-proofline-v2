@@ -1,0 +1,4 @@
+room.json -text
+mandates/*.md -text
+presentation/*.md -text
+presentation/*.srt -text
