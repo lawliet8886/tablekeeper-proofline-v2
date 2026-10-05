@@ -70,3 +70,8 @@ The owner authorized public release of the original room for the V2 competition 
 ### Final presentation revision
 
 The reviewed film adds separate English guides and an explicitly labeled translation beside unaltered original evidence crops. It retains the original Sulafat AAC audio packets. Actual encoded frame samples, a full decode and the narration transcription were reviewed; this is not a continuous human listening certificate and does not change the intervention or eligibility disclosure.
+
+
+## Direct room recording and application walkthrough — 2026-10-05
+
+The revised video replaces brief room/app still excerpts with authentic browser recordings. It demonstrates booking, confirmation, reference lookup and an invalid reference using fictitious data, then inspects the selected original BAND room, three identities and a real Coordinator-to-Builder manifest with numbered parts and delivery status. The original audio and intervention disclosure are preserved. This is post-run presentation work, not another factory execution. There were no new worker messages, code changes or runtime restarts for the recording. Full private evaluation and the organizer's eligibility/autonomy decision remain unknown.

@@ -33,3 +33,8 @@ The final media are in `presentation/` in this repository. The video shows actua
 Prepared for the authorized V2 submission. The unmodified room contains account identifiers, local paths and tool output. Its original bytes are kept for review; it has not been silently redacted. The owner expressly authorized publishing this original room after its privacy review. The separate private working archive is not part of this repository.
 
 Official event reference: [participant guide](https://raw.githubusercontent.com/band-ai/dark-factory-wearedevs/main/docs/participant-guide.md). Independent public acceptance is evidence of the delivered result, not a promise of qualification or ranking.
+
+
+## Presentation update — 2026-10-05
+
+The 3m30 video now includes 107 seconds of direct screen recordings: the actual application walkthrough and a post-completion inspection of the original BAND room, its three seats, a genuine peer handoff and the accepted result. It retains the original Google Sulafat audio. The recording was made after execution; it does not claim uninterrupted factory autonomy. Stage source, original room export and generic mandates are unchanged. See `presentation/MEDIA_CORRECTION_20261005.json` for exact media provenance.

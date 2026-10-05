@@ -1,0 +1,23 @@
+{
+  "status": "TECHNICAL_QA_AND_INDEPENDENT_SAMPLED_VISUAL_REVIEW_PASS_WITH_LIMITS",
+  "date": "2026-10-05",
+  "selected_run": "V2",
+  "accepted_source": "96ab4b80f21c3ff7744f56c029ed3f9b3fea26ac",
+  "room": "feef446d-fba0-4580-b576-4cf1d4a2324c",
+  "original_room_sha256": "58afadf25b648df0692ecff73a226444af33ecc3611b064ac2c317760c7c5160",
+  "video_path": "presentation/tablekeeper-v2-reviewed-210s.mp4",
+  "video_sha256": "26b5848c85d585eaac2cba0cd6edbde71e138200c205299b6916899f1177600a",
+  "video_bytes": 10755689,
+  "duration_seconds": 210,
+  "direct_screen_recording_seconds": 107,
+  "scope": "Actual app walkthrough with fictitious data and original room inspected after completion",
+  "narrator": "Original Google Sulafat AAC audio packets preserved",
+  "factory_source_or_history_changed": false,
+  "limits": [
+    "Not a recording of uninterrupted factory execution",
+    "Administrative interventions remain disclosed",
+    "Original detailed room text can be small/soft; full room.json is provided",
+    "Visual review is sampled; no continuous human listening certificate",
+    "Public test results do not establish hidden-judge success or organizer eligibility"
+  ]
+}
